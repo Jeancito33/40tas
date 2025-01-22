@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #121212, #6d00ff);
+            font-family: 'Pacifico', cursive;
+            text-align: center;
+            color: white;
+        }
+
+        .mensaje {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f;
+            margin-top: 50px;
+            animation: neonGlow 1.5s infinite alternate;
+            position: relative;
+            z-index: 10;
+        }
+
+        .nombre {
+            font-size: 4rem;
+            color: #ffcc00;
+            text-shadow: 0 0 10px #ff4500, 0 0 20px #ff4500;
+            margin-top: 10px;
+            animation: neonGlow 1.5s infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            0% { text-shadow: 0 0 10px #ff007f; }
+            100% { text-shadow: 0 0 20px #ff007f, 0 0 30px #ff007f; }
+        }
+
+        .regalo-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 70px;
+        }
+
+        .regalo {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, #6d00ff, #ff69b4);
+            border: 5px solid #ffcc00;
+            box-shadow: 0px 5px 15px rgba(255, 0, 255, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            border-radius: 15px;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .tapa {
+            width: 190px;
+            height: 50px;
+            background: radial-gradient(circle, #ffcc00, #ffae00);
+            position: absolute;
+            top: -50px;
+            left: -5px;
+            border-radius: 10px 10px 0 0;
+            transition: transform 0.5s ease;
+            box-shadow: 0px 5px 10px rgba(255, 200, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lazo {
+            width: 60px;
+            height: 30px;
+            background: linear-gradient(135deg, #ff007f, #ff1744);
+            position: absolute;
+            top: -15px;
+            border-radius: 30px 30px 0 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lazo::before,
+        .lazo::after {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 30px;
+            background: linear-gradient(135deg, #ff007f, #ff1744);
+            border-radius: 50%;
+        }
+
+        .lazo::before {
+            left: -45px;
+            transform: rotate(20deg);
+        }
+
+        .lazo::after {
+            right: -45px;
+            transform: rotate(-20deg);
+        }
+
+        .cinta-vertical {
+            width: 20px;
+            height: 180px;
+            background: linear-gradient(135deg, #ffcc00, #ffae00);
+            position: absolute;
+        }
+
+        .cinta-horizontal {
+            width: 180px;
+            height: 20px;
+            background: linear-gradient(135deg, #ffcc00, #ffae00);
+            position: absolute;
+        }
+
+        .globo {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            background: linear-gradient(135deg, #6a0dad, #ff69b4);
+            border-radius: 50%;
+            animation: flotar 5s ease-in-out infinite alternate;
+            top: 15%;
+            left: calc(10% + 10vw * var(--index));
+            z-index: 5;
+        }
+
+        .globo::after {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 50px;
+            background: white;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        @keyframes flotar {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-50px) scale(1.05); }
+        }
+
+        .confeti {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            opacity: 0.9;
+            animation: caer linear infinite;
+        }
+
+        @keyframes caer {
+            0% { transform: translateY(-10vh); opacity: 1; }
+            100% { transform: translateY(110vh); opacity: 0; }
+        }
+
+        .la_sorpresa {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -30%);
+            flex-direction: column;
+            row-gap: 10px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            color: white;
+            font-size: 1.5rem;
+            align-items: center;
+        }
+
+        .sorpresa {
+            width: 190px;
+            height: auto;
+            border-radius: 10px;
+            aspect-ratio: 4 / 5.5;
+            object-fit: cover;
+        }
+        /* Animación de apertura de la tapa */
+        .tapa.abierta {
+            transform: translateY(-100px) rotate(20deg);
+            opacity: 0;
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
+
+        /* Animación de desaparición de la caja */
+        .regalo.abierto {
+            transform: scale(0.8);
+            opacity: 0;
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="mensaje">¡Feliz Cumpleaños!</div>
+    <div class="nombre">Carla</div>
+
+    <div class="regalo-container">
+        <div class="regalo" id="regalo">
+            <div class="tapa" id="tapa">
+                <div class="lazo"></div>
+            </div>
+            <div class="cinta-vertical"></div>
+            <div class="cinta-horizontal"></div>
+        </div> 
+        <div class="la_sorpresa" id="sorpresa-box">
+            <span>Sorpresa, aquí está tu Calato 🎁</span>      
+            <img src="jungkook-bts.gif" alt="Sorpresa" class="sorpresa">  
+        </div>        
+    </div>
+
+    <script>
+        function crearGlobos() {
+            for (let i = 0; i < 7; i++) {
+                let globo = document.createElement("div");
+                globo.classList.add("globo");
+                globo.style.setProperty("--index", i);
+                document.body.appendChild(globo);
+            }
+        }
+
+        function crearConfeti() {
+            const colores = ['#ff007f', '#ffcc00', '#00e1ff', '#ff4500'];
+            for (let i = 0; i < 120; i++) {
+                let confeti = document.createElement("div");
+                confeti.classList.add("confeti");
+                confeti.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
+                confeti.style.left = `${Math.random() * 100}vw`;
+                confeti.style.top = `${Math.random() * -10}vh`;
+                confeti.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                document.body.appendChild(confeti);
+            }
+        }
+
+        crearGlobos();
+        crearConfeti();
+
+        // document.getElementById("regalo").addEventListener("click", function() {
+        //     document.getElementById("sorpresa-box").style.display = "flex";
+        //     this.style.display = "none";
+        // });
+        document.getElementById("regalo").addEventListener("click", function() {
+            const regalo = document.getElementById("regalo");
+            const tapa = document.getElementById("tapa");
+            const sorpresaBox = document.getElementById("sorpresa-box");
+
+            // Agregar clases para animaciones
+            tapa.classList.add("abierta");
+            regalo.classList.add("abierto");
+
+            // Mostrar la sorpresa después de la animación
+            setTimeout(() => {
+                sorpresaBox.style.display = "flex";
+            }, 600);
+        });
+
+    </script>
+
+</body>
+</html>
